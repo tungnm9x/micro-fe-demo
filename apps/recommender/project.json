@@ -1,0 +1,107 @@
+{
+  "name": "recommender",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "micro-fe-test",
+  "sourceRoot": "apps/recommender/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/recommender",
+        "index": "apps/recommender/src/index.html",
+        "main": "apps/recommender/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/recommender/tsconfig.app.json",
+        "assets": [
+          "apps/recommender/src/favicon.ico",
+          "apps/recommender/src/assets"
+        ],
+        "styles": ["apps/recommender/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/recommender/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/recommender/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "options": {
+        "port": 4204,
+        "publicHost": "http://localhost:4204"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "recommender:build:production"
+        },
+        "development": {
+          "browserTarget": "recommender:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "recommender:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/recommender/**/*.ts",
+          "apps/recommender/**/*.html"
+        ]
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/web:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "recommender:build",
+        "port": 4204
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "recommender:build:development"
+        },
+        "production": {
+          "buildTarget": "recommender:build:production"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "name": "onboarding",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "micro-fe-test",
+  "sourceRoot": "apps/onboarding/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/onboarding",
+        "index": "apps/onboarding/src/index.html",
+        "main": "apps/onboarding/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/onboarding/tsconfig.app.json",
+        "assets": [
+          "apps/onboarding/src/favicon.ico",
+          "apps/onboarding/src/assets"
+        ],
+        "styles": ["apps/onboarding/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/onboarding/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/onboarding/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "options": {
+        "port": 4205,
+        "publicHost": "http://localhost:4205"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "onboarding:build:production"
+        },
+        "development": {
+          "browserTarget": "onboarding:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "onboarding:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/onboarding/**/*.ts",
+          "apps/onboarding/**/*.html"
+        ]
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/web:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "onboarding:build",
+        "port": 4205
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "onboarding:build:development"
+        },
+        "production": {
+          "buildTarget": "onboarding:build:production"
+        }
+      }
+    }
+  }
+}
