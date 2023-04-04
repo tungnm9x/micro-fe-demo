@@ -4,17 +4,7 @@ import { Auth0Service } from '@micro-fe-test/shared/data-access-user';
 
 @Component({
   selector: 'micro-fe-test-login-entry',
-  template: `
-    <pre>
-    Is User LoggedIn:      {{ isUserLoggedIn$ |async| json }}
-    </pre
-    >
-    <div [formGroup]="form">
-      <input formControlName="username" />
-      <input formControlName="password" />
-      <button (click)="login()">Submit</button>
-    </div>
-  `,
+  templateUrl: './entry.component.html',
 })
 export class RemoteEntryComponent {
   form: FormGroup = this.fb.group({
