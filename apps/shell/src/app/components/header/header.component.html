@@ -20,7 +20,7 @@
   <ng-container *ngIf="auth.user$ | async as user; else noAvatar">
     <div class="flex items-center cursor-pointer group relative">
       <img class="w-[32px] h-[32px] rounded-full" [src]="user.picture" />
-      <span class="ml-2">{{ user.nickname }}</span>
+      <span class="ml-2">{{ user.name }}</span>
       <div
         class="absolute right-0 w-full top-full bg-white shadow hidden group-hover:block"
       >
