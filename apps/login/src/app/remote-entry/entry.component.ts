@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Auth0Service } from '@micro-fe-test/shared/data-access-user';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'micro-fe-test-login-entry',
@@ -11,11 +12,11 @@ export class RemoteEntryComponent {
     username: '',
     password: '',
   });
-  constructor(private fb: FormBuilder, private auth0: Auth0Service) {}
-
-  isUserLoggedIn$ = this.auth0.isUserLoggedIn$;
+  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService, private fb: FormBuilder) {}
+  // isUserLoggedIn$ = this.auth0.isUserLoggedIn$;
   login(): void {
-    const { username, password } = this.form.value;
-    this.auth0.checkCredentials(username, password);
+    // const { username, password } = this.form.value;
+    // this.auth0.checkCredentials(username, password);
+    this.auth.handleRedirectCallback()
   }
 }

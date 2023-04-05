@@ -1,5 +1,6 @@
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { Route } from '@angular/router';
+import { AuthGuard } from '@auth0/auth0-angular';
+import { ShellLayoutComponent } from './layouts/shell-layout/shell-layout.component';
 
 export const appRoutes: Route[] = [
   {
@@ -7,32 +8,20 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('login/Module').then((m) => m.RemoteEntryModule),
   },
   {
-    path: 'onboarding',
-    loadChildren: () =>
-      import('onboarding/Module').then((m) => m.RemoteEntryModule),
-  },
-  {
-    path: 'recommender',
-    loadChildren: () =>
-      import('recommender/Module').then((m) => m.RemoteEntryModule),
-  },
-  {
-    path: 'shipping',
-    loadChildren: () =>
-      import('shipping/Module').then((m) => m.RemoteEntryModule),
-  },
-  {
-    path: 'payment',
-    loadChildren: () =>
-      import('payment/Module').then((m) => m.RemoteEntryModule),
-  },
-  {
-    path: 'shopping-cart',
-    loadChildren: () =>
-      import('shopping-cart/Module').then((m) => m.RemoteEntryModule),
-  },
-  {
     path: '',
-    component: NxWelcomeComponent,
+    component: ShellLayoutComponent,
+    children: [
+      {
+        path: 'onboarding',
+        loadChildren: () =>
+          import('onboarding/Module').then((m) => m.RemoteEntryModule),
+      },
+      {
+        path: '',
+        redirectTo: 'onboarding',
+        pathMatch: 'full'
+      }
+    ],
+    canActivate: [AuthGuard]
   },
 ];
