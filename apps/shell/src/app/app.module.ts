@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { SharedDataAccessUserModule } from '@micro-fe-test/shared/data-access-user';
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { ShellLayoutComponent } from './layouts/shell-layout/shell-layout.component';
@@ -19,7 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
-    SharedDataAccessUserModule,
     StoreSharingModule,
     HeaderComponent,
     HttpClientModule,
@@ -35,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     ),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
+    AuthModule.forRoot({...environment.auth}),
   ],
   providers: [],
   bootstrap: [AppComponent],
