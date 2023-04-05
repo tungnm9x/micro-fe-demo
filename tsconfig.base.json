@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@micro-fe-test/common-ui": ["libs/common-ui/src/index.ts"],
       "@micro-fe-test/shared/data-access-user": [
         "libs/shared/data-access-user/src/index.ts"
       ]

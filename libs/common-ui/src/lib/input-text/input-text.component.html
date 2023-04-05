@@ -1,0 +1,28 @@
+<div
+  class="container{{ panelClass ? ' ' + panelClass : '' }}"
+  [class.error]="errors && control?.touched"
+>
+  <div class="item cell auto">
+    <span class="label"
+      >{{ label }} <span class="mark-required" *ngIf="isRequired">*</span></span
+    >
+    <span class="label-note" *ngIf="note">{{ note }}</span>
+    <div class="value">
+      <input
+        class="input"
+        type="text"
+        [disabled]="isDisabled"
+        [readOnly]="isReadonly"
+        [placeholder]="placeHolder || ''"
+        [value]="value || null"
+        [minLength]="minLength"
+        [maxLength]="maxLength"
+        (blur)="onTouched()"
+        (input)="handlerKeyPress($event)"
+      />
+    </div>
+  </div>
+  <div class="width-100">
+    <ng-content></ng-content>
+  </div>
+</div>

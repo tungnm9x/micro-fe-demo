@@ -1,0 +1,20 @@
+{
+  "name": "common-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/common-ui/src",
+  "prefix": "micro-fe-test",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/common-ui/**/*.ts",
+          "libs/common-ui/**/*.html"
+        ]
+      }
+    }
+  }
+}

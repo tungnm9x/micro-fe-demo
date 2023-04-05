@@ -1,0 +1,147 @@
+$primary: #F9B619;
+$secondary: #D4D4D4;
+$success: #009F3A;
+$warning: #FCC800;
+$info: #2893F2;
+$alert: #CC0022;
+
+$light-gray: #EBEBEB;
+$medium-gray: #808080;
+$dark-gray: #666666;
+$black: #333333;
+$white: #ffffff;
+
+$body-background: #F2F3F0;
+$body-color: $black;
+
+$font-color: #999999;
+
+$border-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+input {
+  padding: 9px 15px !important;
+  border: 1px solid $light-gray !important;
+  border-radius: 4px;
+}
+
+input:focus-visible {
+    outline: none;
+}
+
+img {
+  cursor: pointer;
+}
+
+.label {
+  color: rgba($medium-gray, 0.8);
+  font-size: 14px;
+}
+
+.label-note {
+  color: $medium-gray;
+  margin: 0 5px;
+  font-size: 14px;
+  font-style: italic;
+
+  &::before {
+    content: '(';
+  }
+
+  &::after {
+    content: ')';
+  }
+}
+
+.container {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .item {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .value {
+    position: relative;
+    z-index: 10;
+    min-height: 40px;
+
+    input,
+    textarea {
+      box-shadow: none;
+      height: 100%;
+      max-width: 100%;
+
+      &::placeholder {
+        color: $light-gray;
+        font-size: 14px;
+        font-style: normal;
+      }
+    }
+
+    input:disabled,
+    textarea:disabled {
+      cursor: default;
+      color: $dark-gray;
+      background-color: $body-background;
+    }
+  }
+
+  &.error {
+    color: $alert;
+
+    .label {
+      color: $alert;
+    }
+
+    .input,
+    textarea
+    {
+      color: $alert;
+      border: 1px solid $alert;
+    }
+
+    mat-icon,
+    input::placeholder,
+    textarea::placeholder {
+      color: $alert;
+    }
+  }
+}
+
+.error-message {
+  color: $alert;
+
+  span {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    mat-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+  }
+}
+
+.value {
+  &.read-only {
+    background-color: #F2F3F0;
+    cursor: default;
+
+    input {
+      cursor: default;
+    }
+  }
+}
+
+.disabled {
+  cursor: default !important;
+  background-color: $body-background !important;
+}
