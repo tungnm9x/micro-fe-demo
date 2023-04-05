@@ -7,6 +7,8 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
@@ -15,10 +17,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@env": ["environments/environment.ts"],
       "@micro-fe-test/common-ui": ["libs/common-ui/src/index.ts"],
+      "@micro-fe-test/graphql": ["libs/graphql/src/index.ts"],
       "@micro-fe-test/shared/data-access-user": [
         "libs/shared/data-access-user/src/index.ts"
-      ]
+      ],
+      "@micro-fe-test/store-sharing": ["libs/store-sharing/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

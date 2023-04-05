@@ -1,0 +1,36 @@
+query HotelList($filter: HotelFilter) {
+  response: hotelList(filter: $filter) {
+    count
+    totalPage
+    data {
+      ... on Hotel {
+        timeZone
+        defaultPax
+        preferredLanguageCode
+        isCityTaxIncludedSellingPrice
+        organisation {
+          id
+          name
+        }
+        country {
+          name
+          code
+          phoneCode
+        }
+        id
+        code
+        name
+        address
+        city
+        state
+        phone
+        mappingHotelCode
+        baseCurrency {
+          code
+        }
+        measureMetric
+        taxSetting
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+schema:
+  - https://extranet-services-dev.gauvendi.com/graphql:
+      headers:
+        Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiR1ZEX1JGQyIsIkdWRF9CT09LSU5HIiwiR1ZEX0hPVEVMIiwiR1ZEX0NPUkUiLCJHVkRfRVhUUkFORVQiXSwiZnVsbF9uYW1lIjoiMThBcnRzIEhvdGVsIEFkbWluIiwiZW1haWxfYWRkcmVzcyI6ImFkbWluLjE4YXJ0c0BnYXV2ZW5kaS5jb20iLCJyb2xlIjpbIkdWQ0dOQVJUOjpITSJdLCJvcmdhbmlzYXRpb25fY29kZSI6IkdWQ0dOQVJUIiwidXNlcl9pZCI6ImQyOGU5MTA3LTZiOGEtNDcxYS04M2ZkLTdlNjlhMjk1ZTcwYSIsInVzZXJfbmFtZSI6ImFkbWluLjE4YXJ0c0BnYXV2ZW5kaS5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjgwNzU0OTM0LCJqdGkiOiJiODBiYjgzZS03YmU1LTRhZDUtYjZjNC04YWJmYzU3ZGY3ZDUiLCJjbGllbnRfaWQiOiJnYXV2ZW5kaS1leHRyYW5ldCJ9.KL3VhAGUdLvRl8DlomYPCsclt1XnWvNCVD3oVtAJojnvhf2azWScGrJz3r6F5l3wcmwKczg12NHZiEdfjzOvBScBVGgIv1gnEHwdKKCbQAtOvTsnv-MfgnoGNWqONVR-sQJGqZBDk6wbqUoJ3k4E6syxWbd7uTIKULeFUtyKO9iMsxG7xdeulEgGZ1yzFkw-t2HA-gtK4fN2SyIkoCKpd9J665X68vyX7DbZWcfePlAof4kdyA_w3GtphVBzIWdQ17Kn2gKQNI9qVeMsv0crfzsRYrr_EDAwrWnBskJPQAb_ceGfUZzqr0zZmdGGbEVkTBH71JdxwQ6UELhEXwBz9w
+overwrite: true
+#watch : true
+config:
+  noNamespaces: true
+generates:
+  ./libs/graphql/src/lib/generated/graphql.ts:
+    plugins:
+      - typescript:
+          skipTypename: true
+          avoidOptionals: false
+          declarationKind: "interface"
+  ./libs/graphql/src/lib/generated/queries.ts:
+    documents: ./libs/graphql/src/lib/queries/**/*.graphql
+    config:
+      namePrefix: "Query"
+      nameSuffix: "Docs"
+      namingConvention: keep
+    plugins:
+      - typescript-document-nodes
+  ./libs/graphql/src/lib/generated/mutations.ts:
+    documents: ./libs/graphql/src/lib/mutations/**/*.graphql
+    config:
+      namePrefix: "Mutation"
+      nameSuffix: "Docs"
+      namingConvention: keep
+    plugins:
+      - typescript-document-nodes

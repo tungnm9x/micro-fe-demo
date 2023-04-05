@@ -9,3 +9,5 @@ declare module 'recommender/Module';
 declare module 'onboarding/Module';
 
 declare module 'login/Module';
+
+declare module 'sales-plan/Module';

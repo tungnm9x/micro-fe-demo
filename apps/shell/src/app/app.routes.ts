@@ -17,11 +17,16 @@ export const appRoutes: Route[] = [
           import('onboarding/Module').then((m) => m.RemoteEntryModule),
       },
       {
+        path: 'sales-plan',
+        loadChildren: () =>
+          import('sales-plan/Module').then((m) => m.RemoteEntryModule),
+      },
+      {
         path: '',
-        redirectTo: 'onboarding',
-        pathMatch: 'full'
-      }
+        redirectTo: 'sales-plan',
+        pathMatch: 'full',
+      },
     ],
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard],
   },
 ];

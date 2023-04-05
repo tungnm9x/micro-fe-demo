@@ -1,0 +1,23 @@
+<div class="flex items-center justify-between wrapper">
+  <div class="flex items-center list-hotel">
+    <span><b>Property</b></span>
+    <!-- <mat-select
+      (selectionChange)="onHotelChange($event)"
+      [panelClass]="'select-hotel-list'"
+      [value]="hotelSelectedId$ | async"
+      class="hotel-select"
+      disableOptionCentering
+    >
+      <mat-option
+        *ngFor="let hotel of hotelList$ | async"
+        value="{{ hotel.id }}"
+      >
+        {{ hotel.name }}
+      </mat-option>
+    </mat-select> -->
+  </div>
+  <div class="flex items-center cursor-pointer">
+    <mat-icon>account_circle</mat-icon>
+    <span class="ml-4">User</span>
+  </div>
+</div>

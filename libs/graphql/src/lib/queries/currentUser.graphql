@@ -1,0 +1,21 @@
+query CurrentUser {
+  response: currentUser {
+    count
+    totalPage
+    data {
+      ... on User {
+        emailAddress
+        fullName
+        organisationCode
+        userHotelRoleList {
+          hotel {
+            code
+          }
+          role {
+            code
+          }
+        }
+      }
+    }
+  }
+}

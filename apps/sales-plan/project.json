@@ -1,0 +1,107 @@
+{
+  "name": "sales-plan",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "micro-fe-test",
+  "sourceRoot": "apps/sales-plan/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/sales-plan",
+        "index": "apps/sales-plan/src/index.html",
+        "main": "apps/sales-plan/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/sales-plan/tsconfig.app.json",
+        "assets": [
+          "apps/sales-plan/src/favicon.ico",
+          "apps/sales-plan/src/assets"
+        ],
+        "styles": ["apps/sales-plan/src/styles.css"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/sales-plan/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/sales-plan/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "options": {
+        "port": 4207,
+        "publicHost": "http://localhost:4207"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "sales-plan:build:production"
+        },
+        "development": {
+          "browserTarget": "sales-plan:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "sales-plan:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/sales-plan/**/*.ts",
+          "apps/sales-plan/**/*.html"
+        ]
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/web:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "sales-plan:build",
+        "port": 4207
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "sales-plan:build:development"
+        },
+        "production": {
+          "buildTarget": "sales-plan:build:production"
+        }
+      }
+    }
+  }
+}

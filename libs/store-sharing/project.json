@@ -1,0 +1,20 @@
+{
+  "name": "store-sharing",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/store-sharing/src",
+  "prefix": "micro-fe-test",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/store-sharing/**/*.ts",
+          "libs/store-sharing/**/*.html"
+        ]
+      }
+    }
+  }
+}

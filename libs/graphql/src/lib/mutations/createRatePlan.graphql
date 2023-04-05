@@ -1,0 +1,7 @@
+mutation CreateRatePlan($input: ExtranetRatePlanInput) {
+  response: createRatePlan(input: $input) {
+    code
+    status
+    message
+  }
+}
