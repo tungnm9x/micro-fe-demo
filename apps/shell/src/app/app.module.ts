@@ -12,7 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreSharingModule } from '@micro-fe-test/store-sharing';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, ShellLayoutComponent],
@@ -35,9 +36,15 @@ import { HttpClientModule } from '@angular/common/http';
     ),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
-    AuthModule.forRoot({...environment.auth}),
+    AuthModule.forRoot({ ...environment.auth }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
