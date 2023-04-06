@@ -14,9 +14,13 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreSharingModule } from '@micro-fe-test/store-sharing';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { MenuComponent } from './components/menu/menu.component';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import {MatListModule} from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [AppComponent, ShellLayoutComponent],
+  declarations: [AppComponent, ShellLayoutComponent, MenuComponent, MenuItemComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -24,6 +28,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     StoreSharingModule,
     HeaderComponent,
     HttpClientModule,
+    MatListModule,
+    MatIconModule,
     StoreModule.forRoot(
       {},
       {

@@ -1,0 +1,37 @@
+<mat-nav-list class="mat-list-menu" [routerLinkActive]="'active'">
+  <mat-list-item
+    [routerLinkActive]="'active'"
+    [routerLink]="'/' + url"
+    [queryParamsHandling]="'merge'"
+    class="mat-item-menu"
+  >
+    <div class="item flex items-center justify-between">
+      <div class="flex items-center">
+        <div class="icon-wrapper">
+          <img [src]="icon" [alt]="label" />
+          <img class="icon-active" [src]="iconActive" [alt]="label" />
+        </div>
+        <span>{{ label }}</span>
+      </div>
+      <mat-icon
+        *ngIf="subMenu"
+        [routerLinkActive]="'rotated'"
+        class="menu-button"
+      >
+        expand_more
+      </mat-icon>
+    </div>
+  </mat-list-item>
+
+  <div class="sub-nav" [routerLinkActive]="'expanded'">
+    <mat-nav-list *ngFor="let subItem of subMenu" class="padding-top-0">
+      <mat-list-item
+        [routerLink]="'/' + url + subItem.url"
+        [routerLinkActive]="'active'"
+        [queryParamsHandling]="'merge'"
+      >
+        <div class="item">{{ subItem.label }}</div>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+</mat-nav-list>

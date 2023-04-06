@@ -1,0 +1,108 @@
+$background: #333333;
+$backgroundActive: #f9b619;
+$backgroundSubActive: #4a4a4a;
+$textColor: #fffcf5;
+$font-color: #999999;
+
+.item {
+  width: 100%;
+
+  .icon-wrapper {
+    width: 20px;
+    margin-right: 15px;
+  }
+
+  img {
+    &.icon-active {
+      display: none;
+    }
+  }
+
+  span {
+    transform: translateY(5%);
+    font-weight: 500;
+  }
+
+  span,
+  mat-icon {
+    color: $textColor;
+  }
+}
+
+.menu-button {
+  transition: all 300ms;
+
+  &.rotated {
+    transform: rotate(180deg);
+  }
+}
+
+.mat-item-menu {
+  transition: all 300ms;
+
+  span {
+    color: $font-color;
+  }
+
+  &.active {
+    background-color: $backgroundActive;
+
+    .item {
+      img {
+        display: none;
+
+        &.icon-active {
+          display: inline-block;
+        }
+      }
+
+      span,
+      mat-icon {
+        color: $background;
+      }
+    }
+  }
+}
+
+.sub-nav {
+  overflow-y: hidden;
+  transition: transform 80ms;
+  transform: scaleY(0);
+  transform-origin: top;
+
+  &.expanded {
+    transition: transform 0.6s;
+    transform: scaleY(1);
+  }
+
+  .item {
+    width: auto;
+    color: $font-color;
+    padding-left: 25px;
+  }
+}
+
+.mat-list-menu {
+  height: 48px;
+  padding: 0;
+
+  &.active {
+    height: fit-content;
+
+    .sub-nav {
+      .active {
+        background-color: $backgroundSubActive;
+
+        .item {
+          color: $textColor;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep mat-nav-list {
+  .mdc-list {
+    padding: 0 !important;
+  }
+}

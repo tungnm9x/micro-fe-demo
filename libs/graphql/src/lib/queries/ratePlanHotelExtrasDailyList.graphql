@@ -1,0 +1,26 @@
+query RatePlanHotelExtrasDailyList($filter: ExtranetRatePlanHotelExtrasDailyFilter!) {
+  response: ratePlanHotelExtrasDailyList(filter: $filter) {
+    count
+    totalPage
+    data {
+      ... on RatePlanHotelExtrasDaily {
+        id
+        date
+        isAdjusted
+        ratePlanId
+        hotelExtrasList {
+          id
+          name
+          code
+          hotelAmenityPriceList {
+            price
+            hotelAgeCategory {
+              name
+              code
+            }
+          }
+        }
+      }
+    }
+  }
+}

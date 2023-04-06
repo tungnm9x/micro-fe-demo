@@ -15,3 +15,13 @@ export const selectAllHotel = createSelector(
   selectHotelState,
   (state: HotelState) =>state?.data?.hotelList
 );
+
+export const selectorCockpitSalesPlanList = createSelector(
+  selectHotelState,
+  (state: HotelState) => state?.data?.cockpitSalesPlan
+);
+
+export const selectorRatePlanList = createSelector(
+  selectHotelState,
+  (state: HotelState) => state?.data?.ratePlanList
+);

@@ -1,20 +1,7 @@
 <div class="flex items-center justify-between wrapper">
   <div class="flex items-center list-hotel">
     <span><b>Property</b></span>
-    <!-- <mat-select
-      (selectionChange)="onHotelChange($event)"
-      [panelClass]="'select-hotel-list'"
-      [value]="hotelSelectedId$ | async"
-      class="hotel-select"
-      disableOptionCentering
-    >
-      <mat-option
-        *ngFor="let hotel of hotelList$ | async"
-        value="{{ hotel.id }}"
-      >
-        {{ hotel.name }}
-      </mat-option>
-    </mat-select> -->
+    <span class="text-[16px] ml-[5px]">{{hotelList?.[0].name}}</span>
   </div>
 
   <ng-container *ngIf="auth.user$ | async as user; else noAvatar">

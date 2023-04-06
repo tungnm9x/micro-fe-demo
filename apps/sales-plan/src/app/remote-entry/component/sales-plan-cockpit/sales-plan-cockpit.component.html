@@ -1,0 +1,45 @@
+<div class="container-wrapper">
+  <div class="heading flex items-center justify-between">
+    <h1>Sales Cockpit Management</h1>
+  </div>
+  <div class="wrapper">
+    <div class="list-sales-plan">
+      <ng-container
+        *ngIf="
+          salesPlanCockpitDetailList$ | async as salesPlanCockpitDetailList;
+          else tplLoading
+        "
+      >
+        <ng-container *ngFor="let ratePlan of salesPlanCockpitDetailList">
+          <div class="item">
+            <micro-fe-test-sales-plan-cockpit-item
+              [date]="dateDefault"
+              [ratePlan]="ratePlan"
+              [isPromoted]="ratePlan?.type !== ratePlanType?.Public"
+              [rateType]="ratePlan?.type | parseRatePlanType"
+              [derivedSalePlan]="
+                salesPlanCockpitDetailList | getDerivedSalesPlan : ratePlan
+              "
+              [countColumn]="7"
+              (refreshSalesPlanList)="onRefresh()"
+            ></micro-fe-test-sales-plan-cockpit-item>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<ng-template #tplLoading>
+  <div
+    class="no-data flex justify-center items-center loading-wrapper mt-2"
+  >
+    <div class="flex flex-col justify-center items-center">
+      <mat-spinner
+        [diameter]="50"
+        [strokeWidth]=""
+        class="loading-spinner"
+      ></mat-spinner>
+      <div class="margin-top-1">Loading sales plan list...</div>
+    </div>
+  </div>
+</ng-template>

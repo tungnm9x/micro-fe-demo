@@ -1,0 +1,13 @@
+query DailySalesPlanPricingBreakdown($filter: DailySalesPlanPricingBreakdownFilter) {
+  response: dailySalesPlanPricingBreakdown(filter: $filter) {
+    data {
+      ... on DailySalesPlanPricingBreakdown {
+        propertyId
+        salesPlanId
+        date
+        lowestPrice
+        highestPrice
+      }
+    }
+  }
+}

@@ -1,0 +1,357 @@
+<div
+  class="wrapper"
+  [class.derived]="ratePlan?.status === ratePlanStatusEnum.Archive"
+  [style.--width]="'calc(100% / ' + countColumn + ')'"
+>
+  <div class="header-item flex items-center justify-between">
+    <div class="flex items-center">
+      <div class="flex items-center wrapper-type">
+        <ng-container *ngIf="ratePlan?.isPrimary">
+          <div class="primary">Primary</div>
+        </ng-container>
+        <div class="promo flex items-center" *ngIf="isPromoted">
+          <div class="icon">
+            <img src="assets/icons/promotion.svg" height="14" alt="promo" />
+          </div>
+          <div class="">{{ rateType }}</div>
+        </div>
+        <div
+          class="derived flex items-center"
+          *ngIf="derivedSalePlan"
+        >
+            {{ derivedSalePlan?.code }}
+        </div>
+      </div>
+      <div class="flex items-center sales-plan-name">
+        <div class="code cursor-pointer">
+          {{ ratePlan?.code }}
+        </div>
+        <div class="name">{{ ratePlan?.name }}</div>
+      </div>
+      <div
+        class="room-product-count"
+        *ngIf="
+          (ratePlan?.ratePlanRfcCountList | getRfcCountByType : 'RFC') > 0 ||
+          (ratePlan?.ratePlanRfcCountList | getRfcCountByType : 'ERFC') > 0 ||
+          (ratePlan?.ratePlanRfcCountList | getRfcCountByType : 'MRFC') > 0
+        "
+      >
+        <div
+          *ngIf="
+            ratePlan?.ratePlanRfcCountList
+              | getRfcCountByType : 'RFC' as rfcCount
+          "
+        >
+          {{ rfcCount }} RFC{{ rfcCount > 1 ? 's' : '' }}
+        </div>
+        <div
+          *ngIf="
+            ratePlan?.ratePlanRfcCountList
+              | getRfcCountByType : 'ERFC' as erfcCount
+          "
+        >
+          {{ erfcCount }} ERFC{{ erfcCount > 1 ? 's' : '' }}
+        </div>
+        <div
+          *ngIf="
+            ratePlan?.ratePlanRfcCountList
+              | getRfcCountByType : 'MRFC' as mrfcCount
+          "
+        >
+          {{ mrfcCount }} MRFC{{ mrfcCount > 1 ? 's' : '' }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex items-center view-detail cursor-pointer"
+      (click)="panel?.toggle()"
+    >
+      View details
+      <mat-icon>expand_more</mat-icon>
+    </div>
+  </div>
+  <div class="content">
+    <ng-container *ngIf="ratePlan">
+      <ng-container
+        *ngFor="let summaryItem of ratePlan?.summary | slice : 0 : 2"
+      >
+        <div class="row flex">
+          <div class="title">{{ summaryItem?.name }}</div>
+          <div class="values flex">
+            <ng-container
+              *ngFor="let item of summaryItem?.values; let idx = index"
+            >
+              <ng-container [ngSwitch]="summaryItem?.type">
+                <ng-container *ngSwitchCase="cockpitType.SELLABILITY">
+                  <div class="item flex items-center">
+                    <div
+                      class="cursor-pointer"
+                      [matTooltip]="'Click to edit'"
+                      [matTooltipDisabled]="
+                        ratePlan?.ratePlanDerivedSetting
+                          ?.followDailyRoomProductAvailability
+                      "
+                    >
+                      <img
+                        [src]="
+                          (item
+                          | getSalesPlanSellable
+                            : distributionChanel.GvSalesEngine)
+                            ? 'assets/icons/ibe-enable.svg'
+                            : 'assets/icons/ibe-disable.svg'
+                        "
+                        height="14"
+                      />
+                    </div>
+                    <div class="divided"></div>
+                    <div
+                      class="cursor-pointer"
+                      [matTooltip]="'Click to edit'"
+                      [matTooltipDisabled]="
+                        ratePlan?.ratePlanDerivedSetting
+                          ?.followDailyRoomProductAvailability
+                      "
+                    >
+                      <img
+                        [src]="
+                          (item
+                          | getSalesPlanSellable : distributionChanel.GvVoice)
+                            ? 'assets/icons/voice-enable.svg'
+                            : 'assets/icons/voice-disable.svg'
+                        "
+                        height="14"
+                      />
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="cockpitType.LOWEST_HIGHEST_PRICE">
+                  <div class="item flex items-center">
+                    <ng-container
+                      *ngIf="
+                        item?.lowestPrice || item?.highestPrice;
+                        else tplNaN
+                      "
+                    >
+                      <div class="">
+                        {{
+                          item?.lowestPrice
+                            ? (item?.lowestPrice | number : '1.2-2')
+                            : '-.--'
+                        }}
+                      </div>
+                      <div class="">&nbsp;-&nbsp;</div>
+                      <div class="">
+                        {{
+                          item?.highestPrice
+                            ? (item?.highestPrice | number : '1.2-2')
+                            : '-.--'
+                        }}
+                      </div>
+                    </ng-container>
+                    <ng-template #tplNaN>
+                      <div class="">-.--</div>
+                    </ng-template>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <mat-expansion-panel id="sales-plan-cockpit-detail" #matExpansionPanel>
+        <ng-container
+          *ngFor="
+            let summaryItem of ratePlan?.summary | slice : 2;
+            let idx = index;
+            trackBy: trackByRowValue
+          "
+        >
+          <div
+            class="row flex"
+            [class.hide-row]="
+              !isToggleSalesPlanRestriction &&
+              summaryItem.parentType === cockpitType.SALES_PLAN_RESTRICTION
+            "
+            [class.restriction]="
+              summaryItem.type === cockpitType.SALES_PLAN_RESTRICTION ||
+              summaryItem.type === cockpitType.RESTRICTION_TYPE
+            "
+          >
+            <ng-container
+              *ngIf="
+                summaryItem.type === cockpitType.SALES_PLAN_RESTRICTION;
+                else tplTitleDefault
+              "
+            >
+              <div
+                class="title title--expanded cursor-pointer"
+                (click)="
+                  isToggleSalesPlanRestriction = !isToggleSalesPlanRestriction
+                "
+              >
+                <mat-icon>{{
+                  isToggleSalesPlanRestriction ? 'expand_less' : 'expand_more'
+                }}</mat-icon>
+                {{ summaryItem?.name }}
+              </div>
+            </ng-container>
+            <ng-template #tplTitleDefault>
+              <div class="title title--expanded">{{ summaryItem?.name }}</div>
+            </ng-template>
+            <div
+              class="values flex"
+              [class.extra]="
+                summaryItem?.type === cockpitType.INCLUDED_SERVICES
+              "
+            >
+              <ng-container
+                *ngFor="
+                  let item of summaryItem?.values;
+                  let idx = index;
+                  trackBy: trackByRowValue
+                "
+              >
+                <ng-container [ngSwitch]="summaryItem?.type">
+                  <ng-container *ngSwitchCase="cockpitType.PAYMENT_TERM">
+                    <div
+                      class="item flex items-center can-edit cursor-pointer"
+                      [class.is-adjusted]="item?.isAdjusted"
+                      [matTooltip]="'Click to edit'"
+                      [matTooltipDisabled]="
+                        ratePlan?.ratePlanDerivedSetting?.followDailyPaymentTerm
+                      "
+                      [class.can-edit]="
+                        !ratePlan?.ratePlanDerivedSetting
+                          ?.followDailyPaymentTerm
+                      "
+                     
+                    >
+                      {{ item?.paymentTermCode || '--' }}
+                    </div>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="cockpitType.CXL_POLICY">
+                    <div
+                      class="item flex items-center can-edit cursor-pointer"
+                      [matTooltip]="'Click to edit'"
+                      [matTooltipDisabled]="
+                        ratePlan?.ratePlanDerivedSetting?.followDailyCxlPolicy
+                      "
+                      [class.can-edit]="
+                        !ratePlan?.ratePlanDerivedSetting?.followDailyCxlPolicy
+                      "
+                      [class.is-adjusted]="item?.isAdjusted"
+                      
+                    >
+                      {{ item?.cxlPolicyCode || '--' }}
+                    </div>
+                  </ng-container>
+                  <ng-container
+                    *ngSwitchCase="cockpitType.SALES_PLAN_RESTRICTION"
+                  >
+                    <div
+                      class="item flex items-center"
+                      [class.is-adjusted]="item?.isAdjusted"
+                    >
+                      {{ item?.value || '--' }}
+                    </div>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="cockpitType.RESTRICTION_TYPE">
+                    <div
+                      class="item flex items-center cursor-pointer can-edit"
+                      [class.is-adjusted]="item?.isAdjusted"
+                      [matTooltip]="'Click to edit'"
+                      [matTooltipDisabled]="
+                        ratePlan?.ratePlanDerivedSetting?.followDailyRestriction
+                      "
+                      [class.can-edit]="
+                        !ratePlan?.ratePlanDerivedSetting
+                          ?.followDailyRestriction
+                      "
+                      
+                    >
+                      {{ item?.value || '--' }}
+                    </div>
+                  </ng-container>
+                  <ng-container
+                    *ngSwitchCase="cockpitType.SALES_PLAN_ADJUSTMENT"
+                  >
+                    <div
+                      class="item flex items-center cursor-pointer adjustment-value can-edit"
+                      [matTooltip]="'Click to edit'"
+                      [class.is-adjusted]="item?.isAdjusted"
+                      
+                    >
+                      <ng-container *ngIf="item?.value">
+                        <span class="adjustment-img">
+                          <img
+                            [src]="
+                              item?.value < 0
+                                ? 'assets/icons/decreasing-triangle.svg'
+                                : 'assets/icons/increasing-triangle.svg'
+                            "
+                            alt=""
+                          />
+                        </span>
+                      </ng-container>
+                      <span>{{ (item | adjustmentValue) || '--' }}</span>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="cockpitType.INCLUDED_SERVICES">
+                    <div
+                      class="item flex items-center"
+                      [class.is-adjusted]="item?.isAdjusted"
+                    >
+                      <ng-container *ngIf="item?.value?.length === 0">
+                        <div
+                          
+                          [matTooltip]="'Click to add services'"
+                          [matTooltipDisabled]="
+                            ratePlan?.ratePlanDerivedSetting
+                              ?.followDailyIncludedAmenity
+                          "
+                          class="text no-service"
+                          [class.can-edit]="
+                            !ratePlan?.ratePlanDerivedSetting
+                              ?.followDailyIncludedAmenity
+                          "
+                        >
+                          No service
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="item?.value?.length === 1">
+                        <mat-icon>check</mat-icon>
+                        <div
+                        
+                          class="text"
+                          [class.can-edit]="
+                            !ratePlan?.ratePlanDerivedSetting
+                              ?.followDailyIncludedAmenity
+                          "
+                         
+                        >
+                          {{ item?.value[0]?.name }}
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="item?.value?.length > 1">
+                        <div
+                          class="text special"
+                          [class.can-edit]="
+                            !ratePlan?.ratePlanDerivedSetting
+                              ?.followDailyIncludedAmenity
+                          "
+                          
+                        >
+                          {{ item?.value?.length }} services
+                        </div>
+                      </ng-container>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </mat-expansion-panel>
+    </ng-container>
+  </div>
+</div>

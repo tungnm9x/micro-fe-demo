@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'micro-fe-test-sales-plan-entry',
-  template: `<micro-fe-test-nx-welcome></micro-fe-test-nx-welcome>`,
+  template: `<router-outlet></router-outlet>`,
 })
 export class RemoteEntryComponent {}

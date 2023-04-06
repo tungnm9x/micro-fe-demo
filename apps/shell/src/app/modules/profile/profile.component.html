@@ -1,4 +1,4 @@
-<div class="container mt-5" *ngIf="auth.user$ | async as user">
+<div class="container mt-5 p-4" *ngIf="auth.user$ | async as user">
   <div class="w-full flex items-center justify-center">
     <img [src]="user.picture" class="rounded-full" />
   </div>

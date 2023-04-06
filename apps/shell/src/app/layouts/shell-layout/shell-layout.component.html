@@ -3,9 +3,10 @@
     <div class="pt-[15px] pl-[16px]">
       <img src="assets/logo.png" alt="logo" class="w-[119px]" />
     </div>
+    <micro-fe-test-menu></micro-fe-test-menu>
   </div>
   <div class="flex-1 max-w-[calc(100%-200px)] bg-[#f2f3f0] overflow-hidden">
-    <micro-fe-test-header></micro-fe-test-header>
+    <micro-fe-test-header [hotelList]="hotelList$ | async"></micro-fe-test-header>
     <div class="h-[calc(100vh-58px)] overflow-y-auto">
       <router-outlet></router-outlet>
     </div>

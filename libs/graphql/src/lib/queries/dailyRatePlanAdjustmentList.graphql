@@ -1,0 +1,15 @@
+query DailyRatePlanAdjustmentList($filter: DailyRatePlanAdjustmentFilter) {
+  response: dailyRatePlanAdjustmentList(filter: $filter) {
+    count
+    totalPage
+    data {
+      ... on DailyRatePlanAdjustment {
+        date
+        ratePlanId
+        value
+        unit
+        isAdjusted
+      }
+    }
+  }
+}

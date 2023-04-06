@@ -1,7 +1,8 @@
 import { MatIconModule } from '@angular/material/icon';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
+import { Hotel } from '@micro-fe-test/graphql';
 
 @Component({
   selector: 'micro-fe-test-header',
@@ -12,5 +13,6 @@ import { AuthService } from '@auth0/auth0-angular';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+  @Input() hotelList: Hotel[] = [];
   constructor(public auth: AuthService) {}
 }
