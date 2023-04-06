@@ -16,6 +16,7 @@ import { GetRfcCountByTypePipe } from './pipes/get-rfc-count-by-type.pipe';
 import { GetSalesPlanSellablePipe } from './pipes/get-sales-plan-sellable.pipe';
 import { ParseRatePlanTypePipe } from './pipes/parse-rate-plan-type.pipe';
 import { AdjustmentValuePipe } from './pipes/adjustment-value.pipe';
+import { StoreSharingModule } from '@micro-fe-test/store-sharing';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AdjustmentValuePipe } from './pipes/adjustment-value.pipe';
     MatExpansionModule,
     MatDialogModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    StoreSharingModule
   ],
   providers: [],
 })

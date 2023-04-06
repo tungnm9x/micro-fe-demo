@@ -25,3 +25,8 @@ export const selectorRatePlanList = createSelector(
   selectHotelState,
   (state: HotelState) => state?.data?.ratePlanList
 );
+
+export const selectorWeeklyOverview = createSelector(
+  selectHotelState,
+  (state: HotelState) => state?.data?.weeklyOverview
+);

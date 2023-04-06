@@ -1,0 +1,24 @@
+.container-wrapper {
+  width: 190px;
+  height: 120px;
+  background: #ffffff;
+  border: 0.5px solid #cecece;
+  box-shadow: 0 15px 20px rgba(107, 139, 228, 0.071);
+  border-radius: 4px;
+  padding: 14px;
+  text-align: center;
+}
+
+.title {
+  font-size: 14px;
+  line-height: 120%;
+  color: #9a9a9a;
+}
+
+.value {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 28px;
+  color: #333333;
+  margin-top: 25px;
+}

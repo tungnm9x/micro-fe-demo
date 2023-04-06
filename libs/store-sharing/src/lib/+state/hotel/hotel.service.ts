@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ExecuteGraphqlService, QueryDailyRatePlanAdjustmentListArgs, QueryDailyRatePlanAdjustmentListDocs, QueryDailySalesPlanPricingBreakdownArgs, QueryDailySalesPlanPricingBreakdownDocs, QueryDailySalesPlanSellabilityListArgs, QueryDailySalesPlanSellabilityListDocs, QueryHotelListArgs, QueryHotelListDocs, QueryRatePlanCxlPolicyDailyListArgs, QueryRatePlanCxlPolicyDailyListDocs, QueryRatePlanHotelExtrasDailyListArgs, QueryRatePlanHotelExtrasDailyListDocs, QueryRatePlanListArgs, QueryRatePlanListDocs, QueryRatePlanPaymentTermDailyListArgs, QueryRatePlanPaymentTermDailyListDocs, QueryRatePlanRestrictionsDailyListArgs, QueryRatePlanRestrictionsDailyListDocs, RatePlanExpandEnum, ResponseData } from '@micro-fe-test/graphql';
+import { ExecuteGraphqlService, QueryDailyRatePlanAdjustmentListArgs, QueryDailyRatePlanAdjustmentListDocs, QueryDailySalesPlanPricingBreakdownArgs, QueryDailySalesPlanPricingBreakdownDocs, QueryDailySalesPlanSellabilityListArgs, QueryDailySalesPlanSellabilityListDocs, QueryHotelListArgs, QueryHotelListDocs, QueryRatePlanCxlPolicyDailyListArgs, QueryRatePlanCxlPolicyDailyListDocs, QueryRatePlanHotelExtrasDailyListArgs, QueryRatePlanHotelExtrasDailyListDocs, QueryRatePlanListArgs, QueryRatePlanListDocs, QueryRatePlanPaymentTermDailyListArgs, QueryRatePlanPaymentTermDailyListDocs, QueryRatePlanRestrictionsDailyListArgs, QueryRatePlanRestrictionsDailyListDocs, QueryWeeklyOverviewListArgs, QueryWeeklyOverviewListDocs, RatePlanExpandEnum, ResponseData } from '@micro-fe-test/graphql';
 import { Observable, map } from 'rxjs';
 
 @Injectable({
@@ -81,6 +81,18 @@ export class HotelService {
     return this.executeGraphqlService.runQuery({
       query: QueryDailyRatePlanAdjustmentListDocs,
       variables
+    }).pipe(map(({response}) => response));
+  }
+
+  weeklyOverviewList(variables: QueryWeeklyOverviewListArgs): Observable<ResponseData> {
+    return this.executeGraphqlService.runQuery({
+      query: QueryWeeklyOverviewListDocs,
+      variables: {
+        filter: {
+          ...variables.filter,
+
+        }
+      }
     }).pipe(map(({response}) => response));
   }
 }

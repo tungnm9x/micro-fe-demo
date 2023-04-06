@@ -1,29 +1,28 @@
 {
-  "name": "shell",
+  "name": "dashboard",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "micro-fe-test",
-  "sourceRoot": "apps/shell/src",
+  "sourceRoot": "apps/dashboard/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/shell",
-        "index": "apps/shell/src/index.html",
-        "main": "apps/shell/src/main.ts",
+        "outputPath": "dist/apps/dashboard",
+        "index": "apps/dashboard/src/index.html",
+        "main": "apps/dashboard/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/shell/tsconfig.app.json",
-        "assets": ["apps/shell/src/favicon.ico", "apps/shell/src/assets"],
-        "styles": [
-          "apps/shell/src/styles.scss"
+        "tsConfig": "apps/dashboard/tsconfig.app.json",
+        "assets": [
+          "apps/dashboard/src/favicon.ico",
+          "apps/dashboard/src/assets"
         ],
-        "scripts": [
-          
-        ],
+        "styles": ["apps/dashboard/src/styles.css"],
+        "scripts": [],
         "customWebpackConfig": {
-          "path": "apps/shell/webpack.config.js"
+          "path": "apps/dashboard/webpack.config.js"
         }
       },
       "configurations": {
@@ -42,14 +41,8 @@
           ],
           "outputHashing": "all",
           "customWebpackConfig": {
-            "path": "apps/shell/webpack.prod.config.js"
-          },
-          "fileReplacements": [
-            {
-              "replace": "environments/environment.ts",
-              "with": "environments/environment.prod.ts"
-            }
-          ]
+            "path": "apps/dashboard/webpack.prod.config.js"
+          }
         },
         "development": {
           "buildOptimizer": false,
@@ -63,17 +56,17 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/angular:module-federation-dev-server",
+      "executor": "@nrwl/angular:webpack-dev-server",
       "options": {
-        "port": 4200,
-        "publicHost": "http://localhost:4200"
+        "port": 4208,
+        "publicHost": "http://localhost:4208"
       },
       "configurations": {
         "production": {
-          "browserTarget": "shell:build:production"
+          "browserTarget": "dashboard:build:production"
         },
         "development": {
-          "browserTarget": "shell:build:development"
+          "browserTarget": "dashboard:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -81,21 +74,33 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "shell:build"
+        "browserTarget": "dashboard:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/shell/**/*.ts", "apps/shell/**/*.html"]
+        "lintFilePatterns": [
+          "apps/dashboard/**/*.ts",
+          "apps/dashboard/**/*.html"
+        ]
       }
     },
     "serve-static": {
       "executor": "@nrwl/web:file-server",
+      "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "shell:build",
-        "port": 4200
+        "buildTarget": "dashboard:build",
+        "port": 4208
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "dashboard:build:development"
+        },
+        "production": {
+          "buildTarget": "dashboard:build:production"
+        }
       }
     }
   }

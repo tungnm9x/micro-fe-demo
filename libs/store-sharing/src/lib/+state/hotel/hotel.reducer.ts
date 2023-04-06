@@ -16,7 +16,8 @@ const initialHotelState: HotelState = {
     hotelList: null,
     hotelSelected: null,
     cockpitSalesPlan: null,
-    ratePlanList: null
+    ratePlanList: null,
+    weeklyOverview: null
   },
   isLoading: false,
   error: null
@@ -74,6 +75,22 @@ const reducer = createReducer(
     data: {
       ...state.data,
       ratePlanList: ratePlans
+    }
+  })),
+  on(HotelActions.loadWeeklyOverview, (state) => ({
+    ...state,
+    isLoading: true,
+    data: {
+      ...state.data,
+      weeklyOverview: null
+    }
+  })),
+  on(HotelActions.loadedWeeklyOverviewSuccessfully, (state, {weeklyOverview}) => ({
+    ...state,
+    isLoading: false,
+    data: {
+      ...state.data,
+      weeklyOverview
     }
   })),
 );

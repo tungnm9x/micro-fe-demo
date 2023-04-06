@@ -272,3 +272,38 @@ export const QueryRatePlanRestrictionsDailyListDocs = gql`
   }
 }
     `;
+export const QueryWeeklyOverviewListDocs = gql`
+    query WeeklyOverviewList($filter: WeeklyOverviewFilter) {
+  response: weeklyOverviewList(filter: $filter) {
+    count
+    totalPage
+    data {
+      ... on WeeklyOverview {
+        totalAverageDailyRate
+        totalRoomNights
+        totalOccupancyRate
+        totalRoomNightsPickUpFromYesterday
+        overviewDailyList {
+          date
+          totalRoomNightsPickUpFromYesterday
+          averageDailyRate
+          totalPropertyRooms
+          availablePropertyRooms
+          availableToSell
+          totalArrival
+          totalDeparture
+          channelList {
+            channelName
+            date
+            occupancyRate
+            totalRoomSold
+            averageDailyRate
+            totalAdults
+            totalKids
+          }
+        }
+      }
+    }
+  }
+}
+    `;

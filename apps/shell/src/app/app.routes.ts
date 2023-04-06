@@ -27,6 +27,11 @@ export const appRoutes: Route[] = [
           import('sales-plan/Module').then((m) => m.RemoteEntryModule),
       },
       {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('dashboard/Module').then((m) => m.RemoteEntryModule),
+      },
+      {
         path: '',
         redirectTo: 'profile',
         pathMatch: 'full',
@@ -37,7 +42,9 @@ export const appRoutes: Route[] = [
   {
     path: 'callback',
     loadChildren: () =>
-      import('./modules/callback/callback.module').then((m) => m.CallbackModule),
+      import('./modules/callback/callback.module').then(
+        (m) => m.CallbackModule
+      ),
   },
   {
     path: 'error',

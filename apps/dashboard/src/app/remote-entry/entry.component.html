@@ -1,0 +1,91 @@
+<div class="content-wrapper">
+  <div class="heading flex items-center justify-between">
+    <h1 class="font-bold">Dashboard</h1>
+  </div>
+  <div class="body">
+    <div class="flex items-center header-wrapper">
+      <div class="title">
+        Weekly Overview
+        <div class="sub">By stay date</div>
+      </div>
+    </div>
+    <div class="content">
+      <ng-container *ngIf="dateWeekList?.length > 0">
+        <div class="occ-field">
+          <div class="label">&nbsp;</div>
+          <div class="info-field">
+            <ng-container *ngFor="let item of dateWeekList">
+              <div class="info daily-text">{{ item }}</div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="adrList?.length > 0">
+        <div class="occ-field">
+          <div class="label">
+            ADR <span class="font-bold">({{ currency }})</span>
+          </div>
+          <div class="info-field">
+            <ng-container *ngFor="let item of adrList">
+              <div class="info">{{ item }}</div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="occList?.length > 0">
+        <div class="occ-field">
+          <div class="label">Occupancy</div>
+          <div class="info-field">
+            <ng-container *ngFor="let item of occList">
+              <div class="info">{{ item }}</div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="arrivalList?.length > 0">
+        <div class="occ-field">
+          <div class="label">Arrival</div>
+          <div class="info-field">
+            <ng-container *ngFor="let item of arrivalList">
+              <div class="info">{{ item }}</div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="departureList?.length > 0">
+        <div class="occ-field">
+          <div class="label">Departure</div>
+          <div class="info-field">
+            <ng-container *ngFor="let item of departureList">
+              <div class="info">{{ item }}</div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div
+      #chart
+      id="chart"
+      class="chart"
+      style="width: 100%; height: 500px"
+    ></div>
+    <div class="footer">
+      <micro-fe-test-weekly-overview-table
+        [title]="'Weekly Average Rate'"
+        [value]="aVRValue ? currency + ' ' + (aVRValue | number : '1.2-2') : 0"
+      ></micro-fe-test-weekly-overview-table>
+      <micro-fe-test-weekly-overview-table
+        [title]="'Weekly Room Nights'"
+        [value]="roomNightsValue ? roomNightsValue : 0"
+      ></micro-fe-test-weekly-overview-table>
+      <micro-fe-test-weekly-overview-table
+        [title]="'Weekly Occupancy'"
+        [value]="occValue ? occValue + '%' : 0"
+      ></micro-fe-test-weekly-overview-table>
+      <micro-fe-test-weekly-overview-table
+        [title]="'24h Room Night Pickup'"
+        [value]="totalYesterdayPickup ? totalYesterdayPickup : 0"
+      ></micro-fe-test-weekly-overview-table>
+    </div>
+  </div>
+</div>

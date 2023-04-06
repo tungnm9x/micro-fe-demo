@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ExtranetRatePlanFilter, Hotel, RatePlan } from '@micro-fe-test/graphql';
+import { ExtranetRatePlanFilter, Hotel, QueryWeeklyOverviewListArgs, RatePlan, WeeklyOverview } from '@micro-fe-test/graphql';
 
 export const initHotel = createAction('[Hotel Page] Init');
 
@@ -39,4 +39,14 @@ export const loadRatePlanList = createAction(
 export const loadedRatePlanListSuccessfully = createAction(
   '[Hotel/API] Loaded rate plan list successfully',
   props<{ ratePlans: RatePlan[], count: number, totalPage: number }>()
+);
+
+export const loadWeeklyOverview = createAction(
+  '[Hotel/API] load weekly overview',
+  props<{ variables: QueryWeeklyOverviewListArgs }>()
+);
+
+export const loadedWeeklyOverviewSuccessfully = createAction(
+  '[Hotel/API] loaded weekly overview successfully',
+  props<{ weeklyOverview: WeeklyOverview[] }>()
 );

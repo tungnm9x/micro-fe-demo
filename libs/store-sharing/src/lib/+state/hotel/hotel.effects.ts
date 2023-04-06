@@ -15,10 +15,11 @@ import {
   RatePlanRestrictionCodeEnum,
   RatePlanRestrictionsDaily,
   SalesPlanSellabilityAdjustment,
+  WeeklyOverview,
 } from '@micro-fe-test/graphql';
 import * as moment from 'moment';
 import { chain } from 'lodash';
-import { CockpitType } from '../../models/cockpit-summary-item';
+import { CockpitType } from '../../models/CockpitSummaryItem';
 
 @Injectable()
 export class HotelEffects {
@@ -293,4 +294,12 @@ export class HotelEffects {
       )
     )
   );
+
+  loadWeeklyOverview$ = createEffect(() => this.actions$.pipe(
+    ofType(HotelActions.loadWeeklyOverview),
+    switchMap(({variables}) => this.hotelService.weeklyOverviewList(variables)
+      .pipe(
+        map(res => HotelActions.loadedWeeklyOverviewSuccessfully({weeklyOverview: res?.data as WeeklyOverview[]}))
+      )
+    )));
 }
