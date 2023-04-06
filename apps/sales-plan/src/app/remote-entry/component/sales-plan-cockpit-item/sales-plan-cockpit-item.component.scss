@@ -1,0 +1,310 @@
+$primary: #F9B619;
+$secondary: #D4D4D4;
+$success: #009F3A;
+$warning: #FCC800;
+$info: #2893F2;
+$alert: #CC0022;
+
+$light-gray: #EBEBEB;
+$medium-gray: #808080;
+$dark-gray: #666666;
+$black: #333333;
+$white: #ffffff;
+
+$body-background: #F2F3F0;
+$body-color: $black;
+
+$font-color: #999999;
+
+$border-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+
+.wrapper {
+  background: #FFFFFF;
+  border: 1px solid #E6E8EC;
+  box-shadow: 4px 5px 15px rgba(0, 0, 0, 0.07);
+  border-radius: 4px;
+
+  &.derived {
+    background-color: rgba(217, 217, 217, .25) !important;
+  }
+
+  .header-item {
+    border-bottom: 1px solid #E6E8EC;
+    padding: 11px 18px;
+
+    .sales-plan-name {
+      .code {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+        text-decoration: underline;
+        color: #333333;
+        position: relative;
+        margin-right: 28px;
+
+        &:after {
+          position: absolute;
+          content: "";
+          right: -20px;
+          width: 12px;
+          height: 1px;
+          background: #333333;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+
+      .name {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        color: #333333;
+      }
+    }
+
+    .room-product-count {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 14px;
+      color: #F9B619;
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-left: 17px;
+
+      &:after {
+        position: absolute;
+        content: "";
+        left: -10px;
+        width: 1px;
+        height: 12px;
+        background: #CACACA;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      > div:not(:last-child) {
+        margin-right: 15px;
+        position: relative;
+
+        &:after {
+          position: absolute;
+          content: "";
+          width: 5px;
+          height: 1px;
+          background-color: #F9B619;
+          right: -12px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+
+    .wrapper-type {
+      ::ng-deep app-room-product-restrictions-tooltip {
+        .show-more-wrapper {
+          display: flex;
+          align-items: center;
+        }
+      }
+
+      .promo, .derived {
+        background-color: $black;
+        border-radius: 1px;
+        width: fit-content;
+        padding: 0 5px;
+        color: $white;
+        font-size: 10px;
+        margin-right: 5px;
+
+        .icon {
+          margin-right: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .mat-icon {
+          font-size: 14px;
+          width: auto;
+          height: auto;
+        }
+      }
+
+
+      .primary {
+        background-color: $primary;
+        border-radius: 1px;
+        width: fit-content;
+        padding: 0 5px;
+        color: $white;
+        font-size: 10px;
+        margin-right: 5px;
+      }
+    }
+
+    .view-detail {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 0.02em;
+      color: #2993F3;
+    }
+  }
+
+  .content {
+    .row {
+      border-bottom: 1px solid #E6E8EC;
+      border-right: 1px solid #E6E8EC;
+      min-height: 40px;
+
+      &.restriction {
+        background-color: #F3F3F3;
+      }
+
+      &:last-child {
+        border-bottom: unset !important;
+      }
+
+      .title {
+        width: 410px;
+        min-height: 40px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.02em;
+        color: #333333;
+        padding: 0 18px;
+        display: flex;
+        align-items: center;
+
+        &--expanded {
+          width: 374px;
+        }
+      }
+
+      .values {
+        width: calc(100% - 410px);
+        align-items: stretch;
+
+        .item {
+          width: var(--width);
+          border-right: 1px solid #E6E8EC;
+          justify-content: center;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 14px;
+          letter-spacing: 0.02em;
+          color: #333333;
+          overflow: hidden;
+          flex: 1;
+          text-align: center;
+
+          &:first-child {
+            border-left: 1px solid #E6E8EC;
+          }
+
+          &:last-child {
+            border-right: unset;
+          }
+
+          .divided {
+            position: relative;
+            margin: 0 5px;
+
+            &:after {
+              position: absolute;
+              content: "";
+              right: 0;
+              width: 1px;
+              height: 20px;
+              background-color: #EDEDED;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+          }
+        }
+      }
+    }
+
+    .can-edit {
+      text-decoration: underline;
+    }
+
+    .hide-row {
+      display: none;
+    }
+
+    .extra {
+      font-size: 12px;
+      text-align: center;
+
+      .mat-icon {
+        width: 13px;
+        height: 13px;
+        color: $primary;
+        margin: 0 5px 0 0;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+
+        &:hover {
+          color: $primary;
+        }
+
+        &.special {
+          color: $primary;
+          font-weight: 500;
+        }
+
+        &.no-service {
+          width: fit-content;
+          color: $medium-gray;
+          padding: 0 5px;
+          font-style: italic;
+        }
+      }
+    }
+
+    .is-adjusted {
+      position: relative;
+      overflow: hidden;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: -7px;
+        right: -7px;
+        width: 13px;
+        height: 13px;
+        background-color: #8d8b8b;
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+
+    ::ng-deep mat-expansion-panel#sales-plan-cockpit-detail {
+      .mat-expansion-panel-body {
+        padding: 0;
+
+        .adjustment-value {
+          font-style: italic;
+          text-decoration: underline;
+
+          .adjustment-img {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+query RatePlanList($filter: ExtranetRatePlanFilter) {
+  response: ratePlanList(filter: $filter) {
+    count
+    totalPage
+    data {
+      ... on RatePlan {
+        id
+        code
+        name
+        roundingMode
+        status
+        description
+        promoCodeList
+        type
+        paymentTermCode
+        payAtHotel
+        payOnConfirmation
+        hotelCxlPolicyCode
+        hourPrior
+        displayUnit
+        cancellationFeeValue
+        cancellationFeeUnit
+        mappingRatePlanCode
+        adjustmentValue
+        adjustmentUnit
+        isPrimary
+        pricingMethodology
+        mrfcPositioningMode
+        rfcAttributeMode
+        sellingStrategyType
+        ratePlanDerivedSetting {
+          id
+          hotelId
+          ratePlanId
+          derivedRatePlanId
+          followDailyPaymentTerm
+          followDailyCxlPolicy
+          followDailyIncludedAmenity
+          followDailyRoomProductAvailability
+          followDailyRestriction
+        }
+        translationList {
+          languageCode
+          name
+          description
+        }
+        hotelCancellationPolicy {
+          id
+          name
+          cancellationType
+          mappingCancellationPolicyCode
+          hourPrior
+          displayUnit
+          cancellationFeeValue
+          cancellationFeeUnit
+          description
+        }
+        hotelExtrasCodeList
+        ratePlanRfcCountList {
+          rfcType
+          count
+        }
+        hotelExtrasList {
+          name
+          code
+          description
+        }
+        distributionChannelList
+      }
+    }
+  }
+}

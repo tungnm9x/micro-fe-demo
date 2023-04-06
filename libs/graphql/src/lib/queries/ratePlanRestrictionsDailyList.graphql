@@ -1,0 +1,23 @@
+query RatePlanRestrictionsDailyList($filter: ExtranetRatePlanRestrictionsDailyFilter) {
+  response: ratePlanRestrictionsDailyList(filter: $filter) {
+    data {
+      ... on RatePlanRestrictionsDaily {
+        hotelId
+        ratePlanId
+        ratePlan {
+          id
+          code
+          name
+        }
+        dailyRestrictionList {
+          date
+          restrictionList {
+            isAdjusted
+            code
+            value
+          }
+        }
+      }
+    }
+  }
+}

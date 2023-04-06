@@ -1,0 +1,15 @@
+query RatePlanCxlPolicyDailyList($filter: ExtranetRatePlanCxlPolicyDailyFilter!) {
+  response: ratePlanCxlPolicyDailyList(filter: $filter) {
+    count
+    totalPage
+    data {
+      ... on RatePlanCxlPolicyDaily {
+        hotelId
+        ratePlanId
+        cxlPolicyCode
+        date
+        isAdjusted
+      }
+    }
+  }
+}

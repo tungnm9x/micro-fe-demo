@@ -18,6 +18,5 @@ export class ShellLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(initHotel());
-    this.hotelList$.pipe().subscribe(console.log);
   }
 }

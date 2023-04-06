@@ -1,0 +1,15 @@
+query RatePlanPaymentTermDailyList($filter: ExtranetRatePlanPaymentTermDailyFilter!) {
+  response: ratePlanPaymentTermDailyList(filter: $filter) {
+    count
+    totalPage
+    data {
+      ... on RatePlanPaymentTermDaily {
+        hotelId
+        ratePlanId
+        paymentTermCode
+        date
+        isAdjusted
+      }
+    }
+  }
+}

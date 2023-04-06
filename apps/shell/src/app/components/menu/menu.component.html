@@ -1,0 +1,11 @@
+<div class="list-menu">
+  <ng-container *ngFor="let item of listMenu">
+    <micro-fe-test-menu-item
+      [iconActive]="item.iconActive"
+      [icon]="item.icon"
+      [label]="item.label"
+      [subMenu]="item.subMenu"
+      [url]="item.url"
+    ></micro-fe-test-menu-item>
+  </ng-container>
+</div>

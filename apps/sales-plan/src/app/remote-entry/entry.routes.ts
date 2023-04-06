@@ -1,6 +1,14 @@
 import { Route } from '@angular/router';
-import { RemoteEntryComponent } from './entry.component';
+import { SalesPlanCockpitComponent } from './component/sales-plan-cockpit/sales-plan-cockpit.component';
 
 export const remoteRoutes: Route[] = [
-  { path: '', component: RemoteEntryComponent },
+  {
+    path: 'cockpit',
+    component: SalesPlanCockpitComponent,
+  },
+  { 
+    path: '', 
+    redirectTo: 'cockpit',
+    pathMatch: 'full'
+  },
 ];

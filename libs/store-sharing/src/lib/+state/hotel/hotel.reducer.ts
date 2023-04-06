@@ -15,6 +15,8 @@ const initialHotelState: HotelState = {
   data: {
     hotelList: null,
     hotelSelected: null,
+    cockpitSalesPlan: null,
+    ratePlanList: null
   },
   isLoading: false,
   error: null
@@ -25,8 +27,11 @@ const reducer = createReducer(
   initialHotelState,
   on(HotelActions.initHotel, (state) => ({
     ...state,
-    loaded: false,
-    error: null,
+    isLoading: true,
+    data: {
+      ...state.data,
+      hotelList: null
+    }
   })),
   on(HotelActions.loadHotelSuccess, (state, { hotel }) =>
   ({
@@ -38,7 +43,39 @@ const reducer = createReducer(
     }
   })
   ),
-  on(HotelActions.loadHotelFailure, (state, { error }) => ({ ...state, error }))
+  on(HotelActions.loadHotelFailure, (state, { error }) => ({ ...state, error })),
+  on(HotelActions.loadCockpitSalesPlanList, (state) => ({
+    ...state,
+    isLoading: true,
+    data: {
+      ...state.data,
+      cockpitSalesPlan: null
+    }
+  })),
+  on(HotelActions.loadedCockpitSalesPlanListSuccessfully, (state, {cockpitSalesPlan}) => ({
+    ...state,
+    isLoading: false,
+    data: {
+      ...state.data,
+      cockpitSalesPlan
+    }
+  })),
+  on(HotelActions.loadRatePlanList, (state) => ({
+    ...state,
+    isLoading: true,
+    data: {
+      ...state.data,
+      ratePlanList: null
+    }
+  })),
+  on(HotelActions.loadedRatePlanListSuccessfully, (state, {ratePlans}) => ({
+    ...state,
+    isLoading: false,
+    data: {
+      ...state.data,
+      ratePlanList: ratePlans
+    }
+  })),
 );
 
 export function hotelReducer(state: HotelState | undefined, action: Action) {

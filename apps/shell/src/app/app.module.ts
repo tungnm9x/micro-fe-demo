@@ -13,9 +13,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreSharingModule } from '@micro-fe-test/store-sharing';
 import { HttpClientModule } from '@angular/common/http';
+import { MenuComponent } from './components/menu/menu.component';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import {MatListModule} from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [AppComponent, ShellLayoutComponent],
+  declarations: [AppComponent, ShellLayoutComponent, MenuComponent, MenuItemComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -23,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     StoreSharingModule,
     HeaderComponent,
     HttpClientModule,
+    MatListModule,
+    MatIconModule,
     StoreModule.forRoot(
       {},
       {

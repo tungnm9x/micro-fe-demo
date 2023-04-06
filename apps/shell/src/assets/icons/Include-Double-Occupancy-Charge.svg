@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.391" height="18.641" viewBox="0 0 20.391 18.641">
+  <g id="Group_12065" data-name="Group 12065" transform="translate(-362.609 -351.359)">
+    <g id="user" transform="translate(362.609 351.359)">
+      <g id="Group_1432" data-name="Group 1432" transform="translate(0)">
+        <path id="Path_1812" data-name="Path 1812" d="M13.471,10.2a7.861,7.861,0,0,0-3-1.881,4.562,4.562,0,1,0-5.162,0A7.9,7.9,0,0,0,0,15.782H1.233a6.658,6.658,0,0,1,13.316,0h1.233A7.84,7.84,0,0,0,13.471,10.2ZM7.891,7.891A3.329,3.329,0,1,1,11.22,4.562,3.333,3.333,0,0,1,7.891,7.891Z" transform="translate(0)" fill="#888"/>
+      </g>
+    </g>
+    <g id="Group_12064" data-name="Group 12064" transform="translate(-1 13)">
+      <g id="Ellipse_1010" data-name="Ellipse 1010" transform="translate(373 346)" fill="#fff" stroke="#888" stroke-width="1">
+        <circle cx="5.5" cy="5.5" r="5.5" stroke="none"/>
+        <circle cx="5.5" cy="5.5" r="5" fill="none"/>
+      </g>
+      <text id="_2" data-name="2" transform="translate(376 354)" fill="#888" font-size="8" font-family="Roboto-Bold, Roboto" font-weight="700"><tspan x="0" y="0">2</tspan></text>
+    </g>
+  </g>
+</svg>
